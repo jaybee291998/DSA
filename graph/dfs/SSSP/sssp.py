@@ -2,6 +2,7 @@ import sys
 from model.graph import Graph
 from dfs.topsort.topsort import top_sort
 from bfs.grid_path_find import reconstruct_path
+from dijktras.dijktras import dijktras
 '''
     single source shortest path of an directed acyclic graph
 '''
@@ -60,6 +61,8 @@ def get_graph() -> Graph:
     return graph
 
 def sssp_main():
+    print("_________________________________________________________")
+    print("SSSP")
     node_label: list[str] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     graph: Graph = get_graph()
 
@@ -79,6 +82,18 @@ def sslp_main():
     
     print_traversed_paths(prev, node_label)
 
+
+def dijktras_main():
+    print("_________________________________________________________")
+    print("Dijkstras")
+    node_label: list[str] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    graph: Graph = get_graph()
+
+    distances, prev = dijktras(graph, 0)
+    for i in range(len(distances)):
+        print(f'{node_label[i]} -> {distances[i]}')
+    
+    print_traversed_paths(prev, node_label)
 
 def print_traversed_paths(prev_path: list[int], label: list[str] = None) -> None:
     traversed_paths: list[list[int]] = paths(prev_path)
