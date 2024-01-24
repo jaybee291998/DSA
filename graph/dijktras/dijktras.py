@@ -23,12 +23,16 @@ class Node:
 def dijktras(graph: Graph, start_node: int) -> list[int]:
     distances: list[int] = [sys.maxsize] * len(graph)
     priority_queue: list[Node] = []
+    visited: list[bool] = [False] * len(graph)
     prev: list[int] = [None] * len(graph)
     distances[start_node] = 0
     heapq.heappush(priority_queue, Node(start_node, 0))
     while len(priority_queue) > 0:
         current_node: Node = heapq.heappop(priority_queue)
+        if distances[current_node.node] < current_node.distance: continue
+        visited[current_node.node] = True
         for neighbor in graph.get_adjacent_nodes(current_node.node):
+            if visited[neighbor]: continue
             new_distance: int = current_node.distance + graph.get_edge(current_node.node, neighbor)
             if new_distance < distances[neighbor]:
                 heapq.heappush(priority_queue, Node(neighbor, new_distance))
