@@ -28,7 +28,7 @@ class Graph:
         return self.get_edge(node_one, node_two) is not None
     
     def get_adjacent_nodes(self, node: int) -> list[int]:
-        return [i for i in range(self.size) if self.is_edge_present(node, i)]
+        return [i for i in range(self.size) if self.is_edge_present(node, i) and i != node]
 
     def __calulate_index(self, node_one, node_two):
         return node_one * self.size + node_two
